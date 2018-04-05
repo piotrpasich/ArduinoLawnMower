@@ -1,10 +1,16 @@
 
 #include "UltraSonicSensor.h"
+#include "Motor.h"
+#include "MotorController.h"
 
 //new sensors - works fine
 UltraSonicSensor leftSensor(2, 3);
-//UltraSonicSensor rightSensor(4, 5);
+UltraSonicSensor rightSensor(4, 5);
 
+
+Motor motorA(A3, A2);
+Motor motorB(A6, A7);
+MotorController motorController(motorA, motorB);
 
 // include the library code:
 #include <LiquidCrystal.h>
@@ -17,7 +23,7 @@ void setup () {
 
   lcd.begin(16, 2);
   // Print a message to the LCD.
-  lcd.print("hello, world!");
+  lcd.print("paps!");
 
 //  Sensors sensors;
 //
@@ -36,9 +42,15 @@ void setup () {
 }
 
 void loop () {
+  //motorController.moveForward();  
   
   lcd.setCursor(0, 1);
   // print the number of seconds since reset:
+  lcd.print("L:");
   lcd.print(leftSensor.measureDistanceCm());
+  lcd.print("    ");
+  lcd.print("R:");
+  lcd.print(rightSensor.measureDistanceCm());
+  lcd.print("    ");
 }
 
